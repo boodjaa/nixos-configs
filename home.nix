@@ -11,6 +11,7 @@
 	home.packages = with pkgs; [
 		wofi	
 		gh
+		firefox
 	];
 
 	# --- Shell configuration ------------------
@@ -73,6 +74,15 @@
 		bookmarks = {
 			H = "~";
 			D = "~/Downloads";
+		};
+	};
+
+	# --- Firefox ------------------------------
+	programs.firefox = {
+		enable = true;
+
+		policies = {
+			DisableTelemetry = true;
 		};
 	};
 

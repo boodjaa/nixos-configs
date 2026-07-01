@@ -10,6 +10,7 @@
 	# --- User-level packages ------------------
 	home.packages = with pkgs; [
 		wofi	
+		gh
 	];
 
 	# --- Shell configuration ------------------

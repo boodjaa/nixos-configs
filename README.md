@@ -1,5 +1,5 @@
 # NixOS · btrfs + Root-on-tmpfs + Preservation + Home Manager
-** Complete [Phase 1](#2-phase-1--disk-setup) Download configs, place in /persist/etc/nixos, then skip to [Phase 4](#5-phase-4--install-nixos)**
+** Complete [Phase 1](#2-phase-1--disk-setup) Download configs, place in /persist/etc/nixos, then skip to [Phase 4](#5-phase-4--install-nixos) **
 
 
 A complete guide to installing NixOS with:

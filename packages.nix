@@ -4,12 +4,21 @@
 		git
 		wget
 		curl
+		unzip
 		htop
 		btrfs-progs
 		neovim
 		kitty
 		home-manager
+		xdg-terminal-exec
+		psmisc
 	];
+
+	fonts.packages = with pkgs; [
+		nerd-fonts.jetbrains-mono
+		jetbrains-mono
+	];
+	fonts.fontconfig.enable = true;
 
 	# Hyprland
 	programs.hyprland.enable = true;

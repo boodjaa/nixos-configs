@@ -9,7 +9,7 @@
 
 	# --- User-level packages ------------------
 	home.packages = with pkgs; [
-		#package-name
+		wofi	
 	];
 
 	# --- Shell configuration ------------------
@@ -46,8 +46,34 @@
 		'';
 	};	
 
-	# --- SSH Client ---------------------------
-	programs.ssh.enable = true;
+	# --- Hyprpaper ----------------------------
+	services.hyprpaper = {
+		enable = true;
+		settings = {
+			preload = [ "/home/jamig/wallpaper.png" ];
+			wallpaper = [{
+				monitor = "HDMI-A-1";
+				path = "/home/jamig/wallpaper.png";
+			}];
+		};
+	};
+
+	# --- Wofi ---------------------------------
+	programs.wofi.enable = true;
+
+	# --- Waybar -------------------------------
+	programs.waybar.enable = true;
+
+	# --- nnn ----------------------------------
+	programs.nnn = {
+		enable = true;
+		package = pkgs.nnn.override { withNerdIcons = true; };
+
+		bookmarks = {
+			H = "~";
+			D = "~/Downloads";
+		};
+	};
 
 	# --- Home Manager -------------------------
 	programs.home-manager.enable = true;

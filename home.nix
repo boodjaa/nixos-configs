@@ -11,7 +11,6 @@
 	home.packages = with pkgs; [
 		wofi	
 		gh
-		firefox
 	];
 
 	# --- Shell configuration ------------------

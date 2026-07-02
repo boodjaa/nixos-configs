@@ -22,6 +22,7 @@
 	fonts.fontconfig.enable = true;
 
 	# Hyprland
+	programs.uwsm.enable = true;
 	programs.hyprland.enable = true;
 
 	# Zsh global

@@ -53,7 +53,19 @@
 					how = "bindmount";
 					user = "root"; group = "root"; mode = "0755";
 				}
-			];
-		};
-	};
+
+				# Greeter Theming
+				{
+					directory = "/var/cache/sysc-greet";
+					how = "bindmount";
+					user = "greeter"; group = "greeter"; mode = "0755";
+				}
+				{
+					directory = "/var/lib/greeter";
+					how = "bindmount";
+					user = "greeter"; group = "greeter"; mode = "0755";
+				}
+  			];
+  		};
+  	};
 }

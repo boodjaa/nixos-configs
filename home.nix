@@ -23,7 +23,7 @@
 			nrb = "sudo nixos-rebuild boot --flake /etc/nixos#nixos";
 		};
 		initContent = ''
-			# .zshrc additions go here
+			export PATH=$PATH:/home/jamig/.local/bin	
 		'';
 	};
 
@@ -56,6 +56,7 @@
 				monitor = "HDMI-A-1";
 				path = "/home/jamig/wallpaper.png";
 			}];
+			splash = false;
 		};
 	};
 

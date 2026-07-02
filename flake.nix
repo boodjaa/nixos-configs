@@ -11,9 +11,14 @@
     preservation = {
       url = "github:nix-community/preservation";
     };
+
+    sysc-greet = {
+    	url = "github:Nomadcxx/sysc-greet";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, preservation, ... } @ inputs: {
+  outputs = { self, nixpkgs, home-manager, preservation, sysc-greet, ... } @ inputs: {
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -36,6 +41,9 @@
 	    users.jamig = import ./home.nix;
 	  };
 	}
+
+	# Sysc-greet
+	sysc-greet.nixosModules.default
       ];
     };
   };

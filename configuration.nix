@@ -20,6 +20,21 @@
 	time.timeZone		= "Australia/Melbourne";
 	i18n.defaultLocale	= "en_AU.UTF-8";
 
+	# --- Graphics ----------------------
+	boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+	boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+
+	hardware.graphics.enable = true;
+	nixpkgs.config.allowUnfree = true;
+
+	services.xserver.videoDrivers = [ "nvidia" ];
+
+	hardware.nvidia = {
+		modesetting.enable = true;
+		open = true;
+		package = config.boot.kernelPackages.nvidiaPackages.stable;
+	};
+
 	# --- Nix Settings ------------------
 	nix.settings = {
 		experimental-features = [ "nix-command" "flakes" ];
@@ -56,6 +71,19 @@
 		"d /var/cache/sysc-greet 775 greeter greeter - -"
 		"d /var/lib/greeter 	 775 greeter greeter - -"
 	];
+
+	# --- Automount Drives --------------
+	fileSystems."/mnt/internie" = {
+		device = "/dev/disk/by-label/internie";
+		fsType = "ext4";
+		options = [ "defaults" "nofail" "noauto" "x-systemd.automount" "x-systemd.idle-timeout=60" " x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" "noatime" ];
+	};
+
+	fileSystems."/mnt/ssd" = {
+		device = "/dev/disk/by-label/ssd";
+		fsType = "ext4";
+		options = [ "defaults" "nofail" "noauto" "x-systemd.automount" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" "noatime" ];
+	};
 
 	# --- DO NOT EDIT -------------------
 	system.stateVersion = "26.05";

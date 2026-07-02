@@ -12,9 +12,8 @@
 		home-manager
 		xdg-terminal-exec
 		psmisc
+		e2fsprogs
 	];
-	nixpkgs.config.allowUnfree = true;
-
 	fonts.packages = with pkgs; [
 		nerd-fonts.jetbrains-mono
 		jetbrains-mono
@@ -27,4 +26,7 @@
 
 	# Zsh global
 	programs.zsh.enable = true;
+
+	# Steam
+	programs.steam.enable = true;
 }

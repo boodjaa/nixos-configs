@@ -29,6 +29,9 @@
 	# Preservation module
 	preservation.nixosModules.preservation
 
+	# Sysc-greet
+	sysc-greet.nixosModules.default
+
 	# Home-Manager as-module, single-user mode
 	home-manager.nixosModules.home-manager
 	{
@@ -41,9 +44,6 @@
 	    users.jamig = import ./home.nix;
 	  };
 	}
-
-	# Sysc-greet
-	sysc-greet.nixosModules.default
       ];
     };
   };

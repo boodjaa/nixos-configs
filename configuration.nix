@@ -8,6 +8,9 @@
 		./persist.nix			# <------ Persisting files declarations live here baby
 	];
 
+	# --- Kernel/Latest -----------------
+	boot.kernelPackages = pkgs.linuxPackages_latest;
+
 	# --- Bootloader --------------------
 	boot.loader.systemd-boot.enable		 = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -35,6 +38,13 @@
 		package = config.boot.kernelPackages.nvidiaPackages.stable;
 	};
 
+	environment.sessionVariables = {
+		__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+		LIBVA_DRIVER_NAME = "nvidia";
+		GBM_BACKEND = "nvidia-drm";
+		WLR_NO_HARDWARE_CURSORS = "1";
+	};
+
 	# --- Nix Settings ------------------
 	nix.settings = {
 		experimental-features = [ "nix-command" "flakes" ];
@@ -46,7 +56,7 @@
 
 	users.users.jamig = {
 		isNormalUser		= true;
-		extraGroups		= [ "wheel" "networkmanager" "video" "audio" ];
+		extraGroups		= [ "wheel" "networkmanager" "video" "audio" "uinput" ];
 		hashedPasswordFile	= "/persist/passwords/jamig";
 		shell			= pkgs.zsh;
 	};
@@ -67,16 +77,20 @@
 		enable = true;
 		compositor = "hyprland";
 	};
+
+	# --- Folder Permissions ------------
 	systemd.tmpfiles.rules = [
-		"d /var/cache/sysc-greet 775 greeter greeter - -"
-		"d /var/lib/greeter 	 775 greeter greeter - -"
+		"d /var/cache/sysc-greet 775 greeter greeter - -"	# Needed for greeter
+		"d /var/lib/greeter 	 775 greeter greeter - -"	# Needed for greeter
+		"d /mnt/internie	 775 jamig   users   - -"
+		"d /mnt/ssd		 775 jamig   users   - -"
 	];
 
 	# --- Automount Drives --------------
 	fileSystems."/mnt/internie" = {
 		device = "/dev/disk/by-label/internie";
 		fsType = "ext4";
-		options = [ "defaults" "nofail" "noauto" "x-systemd.automount" "x-systemd.idle-timeout=60" " x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" "noatime" ];
+		options = [ "defaults" "nofail" "noauto" "x-systemd.automount" "x-systemd.idle-timeout=60" "x-systemd.device-timeout=5s" "x-systemd.mount-timeout=5s" "noatime" ];
 	};
 
 	fileSystems."/mnt/ssd" = {

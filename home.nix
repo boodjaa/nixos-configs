@@ -11,6 +11,8 @@
 	home.packages = with pkgs; [
 		wofi	
 		gh
+		oh-my-posh
+		inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default
 	];
 
 	# --- Shell configuration ------------------
@@ -21,7 +23,6 @@
 		shellAliases = {
 			nrs = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
 			nrb = "sudo nixos-rebuild boot --flake /etc/nixos#nixos";
-			nnn = "n";
 		};
 		initContent = ''
 			export PATH=$PATH:/home/jamig/.local/bin	
@@ -85,15 +86,6 @@
 		bookmarks = {
 			H = "~";
 			D = "~/Downloads";
-		};
-	};
-
-	# --- Firefox ------------------------------
-	programs.firefox = {
-		enable = true;
-
-		policies = {
-			DisableTelemetry = true;
 		};
 	};
 

@@ -16,6 +16,8 @@
     	url = "github:Nomadcxx/sysc-greet";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = { self, nixpkgs, home-manager, preservation, sysc-greet, ... } @ inputs: {
